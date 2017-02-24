@@ -1,0 +1,43 @@
+{% if (page.page-header.theme == 'transparent') %}
+
+  {% assign header-class = '' %}
+
+{% else %}
+
+  {% assign header-class = '' %}
+
+{% endif %}
+
+<!-- =================================================
+BEGIN: Header
+================================================== -->
+
+<header data-template="canvas-header" class="header fill {{ page-header-class }}">
+
+  <div class="header-inner">
+
+    <div class="pod pod-narrow pod-short">
+
+      <h1 class="header-logo">
+
+        <a href="{{ site.baseurl }}/" rel="nofollow">
+
+          <span>
+
+            {{ site.title }}
+
+          </span>
+
+        </a>
+
+      </h1>
+
+    </div>
+
+  </div>
+
+</header>
+
+<!-- =================================================
+END: Header
+================================================== -->

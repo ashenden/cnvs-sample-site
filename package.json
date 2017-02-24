@@ -10,6 +10,7 @@
   "bugs": { "url": "" },
   "scripts": { "start": "nodemon app.js" },
   "dependencies": {
+    "cnvs": "^1.1.7",
     "gulp-watch-less": "^1.0.1",
     "less-color-lighten": "0.0.1"
   },

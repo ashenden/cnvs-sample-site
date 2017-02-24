@@ -1,0 +1,109 @@
+<!doctype html>
+
+<!--[if lt IE 7]>
+
+  <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7">
+
+<![endif]-->
+
+<!--[if (IE 7)&!(IEMobile)]>
+
+  <html lang="en" class="no-js lt-ie9 lt-ie8">
+
+<![endif]-->
+
+<!--[if (IE 8)&!(IEMobile)]>
+
+  <html lang="en" class="no-js lt-ie9">
+
+<![endif]-->
+
+<!--[if gt IE 8]><!-->
+
+  <html lang="en" class="no-js">
+
+<!--<![endif]-->
+
+  {% include layout/head.html %}
+
+  <!-- =================================================
+  BEGIN: Body
+  ================================================== -->
+
+  <body>
+
+    {% include layout/body-head.html %}
+
+    <!-- =================================================
+    BEGIN: Canvas
+    ================================================== -->
+
+    <div class="canvas {{ page.id }} flex flex-direction-top-to-bottom flex-direction-left-to-right-screen-medium">
+
+      {% include layout/sidebar.html %}
+
+      <!-- =================================================
+      BEGIN: Page
+      ================================================== -->
+
+      <div class="page flex-item-grow-1">
+
+        {% include layout/page-header.html %}
+
+        <!-- =================================================
+        BEGIN: Page Content Wrapper
+        ================================================== -->
+
+        <div class="page-content-wrapper flex flex-direction-top-to-bottom flex-direction-left-to-right-screen-large">
+
+          {% if page.page-navigation %}
+
+            {% include layout/page-navigation.html %}
+
+          {% endif %}
+
+          <!-- =================================================
+          BEGIN: Page Content
+          ================================================== -->
+
+          <div class="page-content flex flex-direction-top-to-bottom flex-item-grow-1">
+
+            {{ content }}
+
+          </div>
+
+          <!-- =================================================
+          END: Page Content
+          ================================================== -->
+
+        </div>
+
+        <!-- =================================================
+        END: Page Content Wrapper
+        ================================================== -->
+
+      </div>
+
+      <!-- =================================================
+      END: Page
+      ================================================== -->
+
+      {% include layout/modals.html %}
+
+      {% include layout/footer.html %}
+
+    </div>
+
+    <!-- =================================================
+    END: Canvas
+    ================================================== -->
+
+    {% include layout/body-foot.html %}
+
+  </body>
+
+  <!-- =================================================
+  END: Body
+  ================================================== -->
+
+</html>

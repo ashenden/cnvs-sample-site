@@ -30,6 +30,10 @@ var messages = {
   jekyllBuild: '<span style="color: grey">Running:</span> $ jekyll build'
 };
 
+var config = {
+  jekyllConfig: "_config.yml"
+};
+
 var dirs = {
   path: ".",
   styles: "./styles",
@@ -37,10 +41,10 @@ var dirs = {
   vendor: "./javascripts/vendor/**/*.*",
   images: "./images/**/*.*",
   fonts: "./fonts/**/*.*",
-  dist: {
-    path: "./dist",
-    styles: "./dist/styles",
-    javascripts: "./dist/javascripts"
+  build: {
+    path: "./build",
+    styles: "./build/styles",
+    javascripts: "./build/javascripts"
   }
 };
 
@@ -48,7 +52,7 @@ var files = {
   styles: "styles",
   javascripts: "scripts",
   html: dirs.path + "/" + "index.html",
-  dist: {
+  build: {
     styles: {
       filename: "styles",
       suffix: ".min"
@@ -72,12 +76,12 @@ gulp.task('serve', ['build', 'browser-sync', 'watch']);
 
 gulp.task("build", ["move", "styles", "javascripts"]);
 
-// Clean cnvs and Documentation Distribution  Directories
+// Clean cnvs and Documentation buildribution  Directories
 
 gulp.task('clean', function() {
 
   return gulp.src([
-      dirs.dist.path
+      dirs.build.path
     ], {
       read: false
     })
@@ -91,18 +95,17 @@ gulp.task("watch", function () {
 
   gulp.watch([dirs.styles + "/**/*.less"], ["docs:styles"]);
   gulp.watch([dirs.javascripts + "/**/*.js"], ["docs:javascripts"]);
-  gulp.watch([dirs.cnvs.styles + "/**/*.less"], ["cnvs:styles", "docs:styles"]);
   gulp.watch([dirs.path + '/images/**/*'], ["docs:move"]);
   gulp.watch([
     dirs.path + '/**/*.html',
     dirs.path + '/**/*.md',
     dirs.path + '/_data/**/*',
-    '!' + dirs.dist.path + '/**/*'
+    '!' + dirs.build.path + '/**/*'
   ], ['jekyll-rebuild']);
 
 });
 
-// Move Documentation Assets to Documentation Distribution Directory
+// Move Documentation Assets to Documentation buildribution Directory
 
 gulp.task("move", function () {
 
@@ -113,7 +116,7 @@ gulp.task("move", function () {
     ], {
       base: dirs.path
     })
-    .pipe(gulp.dest(dirs.dist.path));
+    .pipe(gulp.dest(dirs.build.path));
 
 });
 
@@ -136,25 +139,25 @@ gulp.task("styles", ["stylelint"], function () {
       browsers: ["last 2 versions"]
     }))
     .pipe(rename({
-      basename: files.dist.styles.filename,
+      basename: files.build.styles.filename,
       extname: ".css"
     }))
     .pipe(sourcemaps.write('./', {
       includeContent: false,
       sourceRoot: dirs.styles
     }))
-    .pipe(gulp.dest(dirs.dist.styles))
+    .pipe(gulp.dest(dirs.build.styles))
     .pipe(minifyCSS())
     .pipe(rename({
-      basename: files.dist.styles.filename,
-      suffix: files.dist.styles.suffix,
+      basename: files.build.styles.filename,
+      suffix: files.build.styles.suffix,
       extname: ".css"
     }))
     .pipe(sourcemaps.write('./', {
       includeContent: false,
       sourceRoot: dirs.styles
     }))
-    .pipe(gulp.dest(dirs.dist.styles));
+    .pipe(gulp.dest(dirs.build.styles));
 
 });
 
@@ -174,11 +177,11 @@ gulp.task("stylelint", function () {
 gulp.task("javascripts", function () {
 
   return gulp.src(dirs.javascripts + "/*.js")
-    .pipe(concat(files.dist.javascripts.filename + ".js"))
-    .pipe(gulp.dest(dirs.dist.javascripts))
+    .pipe(concat(files.build.javascripts.filename + ".js"))
+    .pipe(gulp.dest(dirs.build.javascripts))
     .pipe(rename({
-      basename: files.dist.javascripts.filename,
-      suffix: files.dist.javascripts.suffix,
+      basename: files.build.javascripts.filename,
+      suffix: files.build.javascripts.suffix,
       extname: ".js"
     }))
     .pipe(uglify({
@@ -188,7 +191,7 @@ gulp.task("javascripts", function () {
       util.log(err.message);
       this.emit("end");
     }))
-    .pipe(gulp.dest(dirs.dist.javascripts));
+    .pipe(gulp.dest(dirs.build.javascripts));
 
 });
 
@@ -197,16 +200,16 @@ gulp.task("javascripts", function () {
 gulp.task('browser-sync', ['jekyll-build'], function() {
 
   var files = [
-      dirs.dist.styles + '/**/*.css',
-      dirs.dist.javascripts + '**/*.js',
-      dirs.dist + 'images/**/*'
+      dirs.build.styles + '/**/*.css',
+      dirs.build.javascripts + '**/*.js',
+      dirs.build + 'images/**/*'
    ];
 
   browserSync({
     files: files,
     injectChanges: true,
     server: {
-      baseDir: dirs.dist.path,
+      baseDir: dirs.build.path,
       open: true,
       notify: false
     }
@@ -222,7 +225,7 @@ gulp.task('jekyll-build', function (done) {
 
   var spawn = require('child_process').spawn;
 
-  var jekyll = spawn('jekyll', ['build', '--config=' + dirs.path + '/' + config.jekyllConfig, '--source=' + dirs.path, '--destination=' + dirs.dist.path], {
+  var jekyll = spawn('jekyll', ['build', '--config=' + dirs.path + '/' + config.jekyllConfig, '--source=' + dirs.path, '--destination=' + dirs.build.path], {
     stdio: 'inherit'
   }).on('close', done);
 
