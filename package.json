@@ -1,0 +1,43 @@
+
+{
+  "name": "cnvs-sample-site",
+  "description": "",
+  "version": "0.0.0",
+  "private": true,
+  "author": "",
+  "homepage": "",
+  "contributors": [],
+  "bugs": { "url": "" },
+  "scripts": { "start": "nodemon app.js" },
+  "dependencies": {
+    "gulp-watch-less": "^1.0.1",
+    "less-color-lighten": "0.0.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.10.1",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-htmlmin": "^1.3.0",
+    "gulp-if-else": "^1.0.3",
+    "gulp-jekyll": "0.0.0",
+    "gulp-less": "^3.0.5",
+    "gulp-minify-css": "^1.2.2",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-stylelint": "^3.2.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "stylelint-config-dcos": "0.0.3",
+    "yargs": "^3.31.0"
+  },
+  "keywords": [],
+  "repository": "",
+  "licenses": [{
+    "type": "MIT",
+    "url": "http://opensource.org/licenses/MIT"
+  }]
+}
